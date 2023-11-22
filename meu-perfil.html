@@ -15,7 +15,7 @@
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cadasrtro.css">
+    <link rel="stylesheet" href="css/meu-perfil.css">
     <title>PaperTime</title>
 </head>
 
@@ -60,40 +60,66 @@
     </header>
     <!----------------------------------------------------------------------------------------------------------------------------------------------------->
     <main>
-        <!-- cadastro.html -->
-        <div id="cadastro-container">
-            <h2>Crie sua conta</h2>
 
-            <p>Já é Registrado? <a href="login.html" id="ir-para-login">Ir para o login</a></p>
-
-            <form id="form-cadastro" onsubmit="event.preventDefault(); addUsuario();">
-                <div class="dados">
-                    <label for="email">Endereço de e-mail *</label>
-                    <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
-
-                    <label for="nome-completo">Nome Completo *</label>
-                    <input type="text" id="nome-completo" name="nome-completo" required
-                        placeholder="Digite seu nome completo">
-
-                    <label for="cpf">CPF *</label>
-                    <input type="text" id="cpf" name="cpf" required placeholder="Ex: 999.999.999-99"
-                        oninput="formatarCPF(this)">
-
-                    <label for="senha">Senha *</label>
-                    <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
-
-                    <label for="telefone">Telefone</label>                    
-                    <input type="tel" id="telefone" name="telefone" placeholder="Ex: (81) 9999-9999"
-                        oninput="formatarTelefone(this)">
+        <div class="profile-container">
+            <div class="header-profile">
+                <div class="title">
+                    <h2>Minha Conta</h2>
+                    <h2 id="nome-usuario"></h2>
+                </div>
+                <a href="#" class="logout-link">Sair</a>
+            </div>
+            <div class="caixa-histórico">
+                <div class="box-content">
+                    <img src="Asset/icons/BagCheckFill.png" alt="Ícone de Histórico de Vendas">
+                    <p>Histórico de Vendas</p>
                 </div>
 
-                <div class="check-box">
-                    <input type="checkbox" id="receber-promocoes" name="receber-promocoes">
-                    <label for="receber-promocoes">Desejo receber promoções da PaperTime</label>
+                <div class="sales-history-list">
+                    <p>Não possui histórico de vendas</p>
                 </div>
-                <button type="submit">Criar</button>
-            </form>
+            </div>
+            <div class="caixa-opcoes">
+                <div>
+                    <div class="box">
+                        <div class="box-content">
+                            <img src="Asset/icons/cartao.png" alt="Ícone de Histórico de Vendas">
+                            <p>Formas de Pagamento</p>
+                        </div>
+
+                        <div class="white-box">
+                            <button id="cartao" class="botao-branco">Cartões de Crédito<img
+                                    src="Asset/icons/maior.png"></button>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-content">
+                            <img src="Asset/icons/heart.png" alt="Ícone de Histórico de Vendas">
+                            <p>Lista de Desejos</p>
+                        </div>
+
+                        <div class="white-box">
+                            <button id="favoritos" class="botao-branco">Favoritos <img
+                                    src="Asset/icons/maior.png"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-content">
+                        <img src="Asset/icons/Gear.png" alt="Ícone de Histórico de Vendas">
+                        <p>Configurações</p>
+                    </div>
+
+                    <div class="white-box">
+                        <button id="seguranca" class="botao-branco">Login e Segurança <img
+                                src="Asset/icons/maior.png"></button>
+                        <button id="endereco" class="botao-branco">Endereços <img src="Asset/icons/maior.png"></button>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </main>
     <!----------------------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -131,7 +157,8 @@
                 <div class="footer-column">
                     <h3>Sobre a Loja</h3>
                     <p>Renata é uma jovem apaixonada por decoração de festas de aniversário. Ela realiza seu sonho ao
-                        criar a loja de e-commerce "PaperTime". Com produtos personalizados e atendimento excepcional, sua
+                        criar a loja de e-commerce "PaperTime". Com produtos personalizados e atendimento excepcional,
+                        sua
                         loja ganha destaque e se torna um sucesso, oferecendo decoração única para eventos especiais</p>
                 </div>
 
@@ -150,29 +177,18 @@
     </footer>
     <!-- Scripts JavaScript no final para melhor desempenho -->
     <script>
-        function formatarCPF(campo) {
-            // Remove caracteres não numéricos
-            const cpfNumerico = campo.value.replace(/\D/g, '');
-
-            // Aplica a máscara
-            if (cpfNumerico.length <= 11) {
-                campo.value = cpfNumerico.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-            } else {
-                // Se o CPF digitado exceder o tamanho, trunca
-                campo.value = cpfNumerico.slice(0, 11);
+        document.addEventListener('DOMContentLoaded', function () {
+            // Adiciona um evento de clique ao botão "CRIE SUA CONTA"
+            var botaoCriarConta = document.getElementById('favoritos');
+            if (botaoCriarConta) {
+                botaoCriarConta.addEventListener('click', function () {
+                    // Redireciona para a página de cadastro.html
+                    window.location.href = 'listaDesejos.html';
+                });
             }
-        }
-
-        function formatarTelefone(campo) {
-            // Remove caracteres não numéricos
-            const telefoneNumerico = campo.value.replace(/\D/g, '');
-
-            // Aplica a máscara
-            campo.value = telefoneNumerico.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
-        }
+        });
     </script>
-    <script src="./js/pg-cadastro.js"></script>
-
+    <script src="./js/meu-perfil.js"></script>
 </body>
 
 </html>

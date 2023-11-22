@@ -69,7 +69,7 @@
             <div class="box-container">
                 <div id="login-existing">
                     <h3>Já sou cadastrado</h3>
-                    <form id="form-login">
+                    <form id="form-login" onsubmit="event.preventDefault(); entrarUsuario();">
                         <div class="email"><label for="email">Email:</label>
                             <input type="email" id="email" name="email" required>
                         </div>
@@ -158,6 +158,7 @@
             }
         });
     </script>
+    <script src="./js/pg-login.js"></script>
 </body>
 
 </html>
